@@ -10,25 +10,16 @@ var quizButton = "";
 var quizQue = ["Question1", "Question2", "Question3", "Question4", "Question5"];
 var quizAns = ["Correct1", "Wrong1", "Wrong2", "Wrong3", "Wrong4", "Correct2", "Wrong5", "Wrong6",
     "Correct1", "Wrong7", "Wrong8", "Wrong9", "Wrong10", "Wrong11", "Wrong12", "Correct4", "Wrong13", "Wrong14", "Correct5", "Wrong15"];
+var quizPage = 0;
 var score = 100;
 
-start.addEventListener("click", function (event) {
-    event.preventDefault();
-    var timerInterval = setInterval(function () {
-        timeRemaining--;
-        timer.textContent = "Time Remaining: " + timeRemaining;
 
-        if (timeRemaining === 0) {
-            clearInterval(timerInterval);
-            alert("Time is up!");
-        }
-    }, 1000);
-
+function quizPopulate (quizPage) {
     content.innerHTML = "";
 
     content.appendChild(newH2);
 
-    newH2.textContent = quizQue[0];
+    newH2.textContent = quizQue[quizPage];
 
     for (var i = 0; i < 4; i++) {
         quizButton = document.createElement("button");
@@ -41,7 +32,7 @@ start.addEventListener("click", function (event) {
 
         content.appendChild(quizButton);
 
-        quizButton.textContent = quizAns[i];
+        quizButton.textContent = quizAns[quizPage * 4 + i];
 
         quizButton.addEventListener("click", function (event) {
             event.preventDefault();
@@ -50,8 +41,24 @@ start.addEventListener("click", function (event) {
                 timeRemaining = timeRemaining - 5;
                 score = score - 20;
             }
+            
+            quizPopulate(quizPage +1);
         })
     };
+}
+
+start.addEventListener("click", function (event) {
+    event.preventDefault();
+    var timerInterval = setInterval(function () {
+        timeRemaining--;
+        timer.textContent = "Time Remaining: " + timeRemaining;
+
+        if (timeRemaining === 0) {
+            clearInterval(timerInterval);
+            alert("Time is up!");
+        }
+    }, 1000);
+    quizPopulate(0);
 });
 
 
