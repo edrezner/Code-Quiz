@@ -4,6 +4,12 @@ var content = document.querySelector(".content")
 var timeRemaining = 75;
 var start = document.querySelector(".start");
 var timer = document.querySelector(".timer");
+var newH2 = "";
+var newH2 = document.createElement("h2");
+var quizButton = "";
+var quizQue = ["Question1", "Question2", "Question3", "Question4", "Question5"];
+var quizAns = ["Correct1", "Wrong1", "Wrong2", "Wrong3", "Wrong4", "Correct2", "Wrong5", "Wrong6",
+"Correct1", "Wrong7", "Wrong8", "Wrong9", "Wrong10", "Wrong11", "Wrong12", "Correct4", "Wrong13", "Wrong14", "Correct5", "Wrong15"];
 
 start.addEventListener("click", function (event) {
     event.preventDefault();
@@ -17,16 +23,11 @@ start.addEventListener("click", function (event) {
         }
     }, 1000);
     
-    content.innerHTML = "";
-
-    var newH2 = document.createElement("h2"); 
+    content.innerHTML = ""; 
 
     content.appendChild(newH2);
     
-    newH2.textContent = "Question1";
-    
-    var quizButton = "";
-    var quizQue = ["Correct1", "Wrong1", "Wrong2", "Wrong3"];
+    newH2.textContent = quizQue[0];
 
     for (var i = 0; i < 4; i++) {
         quizButton = document.createElement("button");
@@ -39,11 +40,16 @@ start.addEventListener("click", function (event) {
 
         content.appendChild(quizButton);
         
-        quizButton.textContent = quizQue[i];
+        quizButton.textContent = quizAns[i];
     };  
     
 
 });
+
+quizButton.addEventListener("click", function(event) {
+    event.preventDefault();
+    
+})
 
 
 /* matches */
