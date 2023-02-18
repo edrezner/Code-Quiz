@@ -19,19 +19,27 @@ start.addEventListener("click", function (event) {
     
     content.innerHTML = "";
 
-    var newH2 = document.createElement("h2");
-    var correctOne = document.createElement("button");
-    var wrongOne = ""; 
+    var newH2 = document.createElement("h2"); 
 
     content.appendChild(newH2);
-    content.appendChild(correctOne);
     
     newH2.textContent = "Question1";
     
-    for (var i = 0; i < 3; i++) {
-        wrongOne = document.createElement("button");
-        wrongOne.setAttribute("class", "wrong");
-        content.appendChild(wrongOne);
+    var quizButton = "";
+    var quizQue = ["Correct1", "Wrong1", "Wrong2", "Wrong3"];
+
+    for (var i = 0; i < 4; i++) {
+        quizButton = document.createElement("button");
+        
+        if (i === 0) {
+            quizButton.classList.add("correct");
+        } else { 
+            quizButton.classList.add("wrong");
+        }
+
+        content.appendChild(quizButton);
+        
+        quizButton.textContent = quizQue[i];
     };  
     
 
