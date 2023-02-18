@@ -1,1 +1,3 @@
-/* parent container position set to relative, children set to absolute */
+button {
+    display: block;
+}
