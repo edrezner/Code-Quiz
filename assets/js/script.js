@@ -1,5 +1,3 @@
-/* 1. clicking start quiz button starts 75 second timer
-*/
 var content = document.querySelector(".content")
 var mark = document.querySelector(".mark")
 var timeRemaining = 75;
@@ -55,7 +53,6 @@ function quizPopulate(quizPage) {
             var selectedAnswer = event.target.textContent;
             if (selectedAnswer !== quizBody[quizPage].answer) {
                 timeRemaining = timeRemaining - 5;
-                mark.innterHTML = "";
                 var newHr = document.createElement("hr");
                 var newP = document.createElement("p");
                 mark.appendChild(newHr);
@@ -82,7 +79,6 @@ function quizPopulate(quizPage) {
             var newHr = document.createElement("hr");
             var newP = document.createElement("p");
             newHr.style.display = "none";
-            newP.style.display = "none";
             mark.innerHTML="";
             content.appendChild(newHr);
             content.appendChild(newP);
@@ -91,7 +87,6 @@ function quizPopulate(quizPage) {
         
     };
 }
-
 
 start.addEventListener("click", function (event) {
     event.preventDefault();
@@ -106,7 +101,3 @@ start.addEventListener("click", function (event) {
     }, 1000);
     quizPopulate(0);
 });
-
-
-
-/* matches */
