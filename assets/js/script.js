@@ -7,8 +7,6 @@ var start = document.querySelector(".start");
 var timer = document.querySelector(".timer");
 var newH2 = document.createElement("h2");
 var quizButton = "";
-var newHr = document.createElement("hr");
-var newP = document.createElement("p");
 var quizBody = [
     {
         title: "Commonly used data types DO NOT include:",
@@ -40,7 +38,7 @@ var quizPage = 0;
 
 function quizPopulate(quizPage) {
     content.innerHTML = "";
-        
+
     content.appendChild(newH2);
 
     newH2.textContent = quizBody[quizPage].title;
@@ -57,10 +55,15 @@ function quizPopulate(quizPage) {
             var selectedAnswer = event.target.textContent;
             if (selectedAnswer !== quizBody[quizPage].answer) {
                 timeRemaining = timeRemaining - 5;
+                mark.innterHTML = "";
+                var newHr = document.createElement("hr");
+                var newP = document.createElement("p");
                 mark.appendChild(newHr);
                 mark.appendChild(newP);
                 newP.textContent = "Wrong!";
             } else {
+                var newHr = document.createElement("hr");
+                var newP = document.createElement("p");
                 mark.appendChild(newHr);
                 mark.appendChild(newP);
                 newP.textContent = "Correct!";
@@ -71,12 +74,24 @@ function quizPopulate(quizPage) {
             if (quizPage < quizBody.length) {
                 quizPopulate(quizPage);
             } else {
-                clearInterval(timerInterval);
                 highScoreScreen();
             }
-        })
+        });
+
+        quizButton.addEventListener("mousedown", function () {
+            var newHr = document.createElement("hr");
+            var newP = document.createElement("p");
+            newHr.style.display = "none";
+            newP.style.display = "none";
+            mark.innerHTML="";
+            content.appendChild(newHr);
+            content.appendChild(newP);
+        });
+
+        
     };
 }
+
 
 start.addEventListener("click", function (event) {
     event.preventDefault();
