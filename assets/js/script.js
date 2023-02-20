@@ -7,7 +7,7 @@ var timer = document.querySelector(".timer");
 var newH2 = document.createElement("h2");
 var hsInput = document.createElement("input");
 var quizButton = "";
-var quizButton2 ="";
+var quizButton2 = "";
 var quizBody = [
     {
         title: "Commonly used data types DO NOT include:",
@@ -52,20 +52,20 @@ function highScoreScreen() {
     hsP.textContent = "Your final score is " + timeRemaining + ".";
 
     hsSubmit.addEventListener("mousedown", function () {
-        mark.innerHTML="";
+        mark.innerHTML = "";
     });
 
     hsSubmit.addEventListener("click", function (event) {
         event.preventDefault();
 
         var initScore = initInput.value.trim() + " - " + timeRemaining;
-        var initScores = localStorage.getItem("initScores") || [];
+        var initScores = localStorage.getItem("highScores") || [];
         if (initScores.length > 0) {
             initScores = JSON.parse(initScores);
         }
         initScores.push(initScore);
-        localStorage.setItem("initScores", JSON.stringify(initScores));
-        
+        localStorage.setItem("highScores", JSON.stringify(initScores));
+
         hsScreen.innerHTML = "";
 
         var header = document.querySelector(".header");
@@ -77,15 +77,15 @@ function highScoreScreen() {
         var hsList = document.createElement("ol");
         hsScreen.appendChild(hsList);
 
-        var scoreListItem = JSON.parse(localStorage.getItem("initScores"));
+        var scoreListItem = JSON.parse(localStorage.getItem("highScores"));
 
         for (var i = 0; i < initScores.length; i++) {
-        var hsItem = document.createElement("li");
-        hsItem.textContent = scoreListItem[i];
-        hsList.appendChild(hsItem);
+            var hsItem = document.createElement("li");
+            hsItem.textContent = scoreListItem[i];
+            hsList.appendChild(hsItem);
         };
-        
-        
+
+
         quizButton = document.createElement("button");
         hsScreen.appendChild(quizButton);
         quizButton.classList.add("goBack");
@@ -96,11 +96,11 @@ function highScoreScreen() {
         quizButton2.classList.add("clearHs");
         quizButton2.textContent = "Clear High Scores";
 
-        quizButton.addEventListener("click", function() {
+        quizButton.addEventListener("click", function () {
             location.reload();
         });
 
-        quizButton2.addEventListener("click", function() {
+        quizButton2.addEventListener("click", function () {
             localStorage.clear();
             hsList.innerHTML = "";
         })
@@ -124,18 +124,16 @@ function quizPopulate(quizPage) {
         quizButton.addEventListener("click", function (event) {
             event.preventDefault();
             var selectedAnswer = event.target.textContent;
+            var newHr = document.createElement("hr");
+            var newP = document.createElement("p");
+            mark.appendChild(newHr);
+            mark.appendChild(newP);
             if (selectedAnswer !== quizBody[quizPage].answer) {
-                timeRemaining = timeRemaining - 5;
-                var newHr = document.createElement("hr");
-                var newP = document.createElement("p");
-                mark.appendChild(newHr);
-                mark.appendChild(newP);
+                timeRemaining = timeRemaining - 10;
+
                 newP.textContent = "Wrong!";
             } else {
-                var newHr = document.createElement("hr");
-                var newP = document.createElement("p");
-                mark.appendChild(newHr);
-                mark.appendChild(newP);
+
                 newP.textContent = "Correct!";
             }
 
@@ -149,16 +147,16 @@ function quizPopulate(quizPage) {
         });
 
         quizButton.addEventListener("mousedown", function () {
-            mark.innerHTML="";
+            mark.innerHTML = "";
         });
 
-        
+
     };
 }
 
 start.addEventListener("click", function (event) {
     event.preventDefault();
-        timerInterval = setInterval(function () {
+    timerInterval = setInterval(function () {
         timeRemaining--;
         timer.textContent = "Time Remaining: " + timeRemaining;
 
