@@ -1,9 +1,11 @@
 var content = document.querySelector(".content")
 var mark = document.querySelector(".mark")
 var timeRemaining = 75;
+var timerInterval = "";
 var start = document.querySelector(".start");
 var timer = document.querySelector(".timer");
 var newH2 = document.createElement("h2");
+var hsInput = document.createElement("input");
 var quizButton = "";
 var quizBody = [
     {
@@ -13,7 +15,7 @@ var quizBody = [
     },
     {
         title: "The condition in an if / else statement is enclosed within ____.",
-        choices: ["quotes", "curly brackets", "parentheses", "square brackets"],
+        choices: ["quotes", "parentheses", "curly brackets", "square brackets"],
         answer: "parentheses",
     },
     {
@@ -23,7 +25,7 @@ var quizBody = [
     },
     {
         title: "String values must be enclosed within _____ when being assigned to variables.",
-        choices: ["commas", "curly brackets", "quotes", "parenthesis"],
+        choices: ["quotes", "curly brackets", "commas", "parenthesis"],
         answer: "quotes",
     },
     {
@@ -33,6 +35,18 @@ var quizBody = [
     },
 ];
 var quizPage = 0;
+var hsP = document.querySelector(".hsP");
+var hsScreen = document.querySelector(".hsScreen");
+
+function highScoreScreen() {
+    content.innerHTML = "";
+
+    clearInterval(timerInterval);
+
+    hsScreen.style.display = "block";
+
+    hsP.textContent = "Your final score is " + timeRemaining + ".";
+}
 
 function quizPopulate(quizPage) {
     content.innerHTML = "";
@@ -76,12 +90,7 @@ function quizPopulate(quizPage) {
         });
 
         quizButton.addEventListener("mousedown", function () {
-            var newHr = document.createElement("hr");
-            var newP = document.createElement("p");
-            newHr.style.display = "none";
             mark.innerHTML="";
-            content.appendChild(newHr);
-            content.appendChild(newP);
         });
 
         
@@ -90,7 +99,7 @@ function quizPopulate(quizPage) {
 
 start.addEventListener("click", function (event) {
     event.preventDefault();
-    var timerInterval = setInterval(function () {
+        timerInterval = setInterval(function () {
         timeRemaining--;
         timer.textContent = "Time Remaining: " + timeRemaining;
 
@@ -101,3 +110,4 @@ start.addEventListener("click", function (event) {
     }, 1000);
     quizPopulate(0);
 });
+

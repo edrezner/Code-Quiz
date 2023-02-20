@@ -5,3 +5,11 @@ button {
 body {
     background-color: #CCB3F2 ;
 }
+
+.hsScreen {
+    display: none;
+}
+
+.hsP {
+    display: inline-block;
+}
