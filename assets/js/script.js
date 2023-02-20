@@ -57,8 +57,10 @@ function highScoreScreen() {
         event.preventDefault();
 
         var initScore = initInput.value.trim() + " - " + timeRemaining;
-        var initScores = localStorage.getItem("initScore") || [];
-        initScores = JSON.parse(initScores);
+        var initScores = localStorage.getItem("initScores") || [];
+        if(initScores.length>0){
+            initScores = JSON.parse(initScores);
+        }
         initScores.push(initScore);
         localStorage.setItem("initScores", JSON.stringify(initScores));
     })
