@@ -37,6 +37,8 @@ var quizBody = [
 var quizPage = 0;
 var hsP = document.querySelector(".hsP");
 var hsScreen = document.querySelector(".hsScreen");
+var hsSubmit = document.querySelector(".hsSubmit");
+var initInput = document.querySelector(".initBox");
 
 function highScoreScreen() {
     content.innerHTML = "";
@@ -46,6 +48,20 @@ function highScoreScreen() {
     hsScreen.style.display = "block";
 
     hsP.textContent = "Your final score is " + timeRemaining + ".";
+
+    hsSubmit.addEventListener("mousedown", function () {
+        mark.innerHTML="";
+    });
+
+    hsSubmit.addEventListener("click", function (event) {
+        event.preventDefault();
+
+        var initScore = initInput.value.trim() + " - " + timeRemaining;
+        var initScores = localStorage.getItem("initScore") || [];
+        initScores = JSON.parse(initScores);
+        initScores.push(initScore);
+        localStorage.setItem("initScores", JSON.stringify(initScores));
+    })
 }
 
 function quizPopulate(quizPage) {
