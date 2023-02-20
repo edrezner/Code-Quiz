@@ -7,6 +7,7 @@ var timer = document.querySelector(".timer");
 var newH2 = document.createElement("h2");
 var hsInput = document.createElement("input");
 var quizButton = "";
+var quizButton2 ="";
 var quizBody = [
     {
         title: "Commonly used data types DO NOT include:",
@@ -40,6 +41,7 @@ var hsScreen = document.querySelector(".hsScreen");
 var hsSubmit = document.querySelector(".hsSubmit");
 var initInput = document.querySelector(".initBox");
 
+
 function highScoreScreen() {
     content.innerHTML = "";
 
@@ -58,12 +60,51 @@ function highScoreScreen() {
 
         var initScore = initInput.value.trim() + " - " + timeRemaining;
         var initScores = localStorage.getItem("initScores") || [];
-        if(initScores.length>0){
+        if (initScores.length > 0) {
             initScores = JSON.parse(initScores);
         }
         initScores.push(initScore);
         localStorage.setItem("initScores", JSON.stringify(initScores));
-    })
+        
+        hsScreen.innerHTML = "";
+
+        var header = document.querySelector(".header");
+        header.style.display = "none";
+
+        hsScreen.appendChild(newH2);
+        newH2.textContent = "High Scores";
+
+        var hsList = document.createElement("ol");
+        hsScreen.appendChild(hsList);
+
+        var scoreListItem = JSON.parse(localStorage.getItem("initScores"));
+
+        for (var i = 0; i < initScores.length; i++) {
+        var hsItem = document.createElement("li");
+        hsItem.textContent = scoreListItem[i];
+        hsList.appendChild(hsItem);
+        };
+        
+        
+        quizButton = document.createElement("button");
+        hsScreen.appendChild(quizButton);
+        quizButton.classList.add("goBack");
+        quizButton.textContent = "Go Back";
+
+        quizButton2 = document.createElement("button");
+        hsScreen.appendChild(quizButton2);
+        quizButton2.classList.add("clearHs");
+        quizButton2.textContent = "Clear High Scores";
+
+        quizButton.addEventListener("click", function() {
+            location.reload();
+        });
+
+        quizButton2.addEventListener("click", function() {
+            localStorage.clear();
+            hsList.innerHTML = "";
+        })
+    });
 }
 
 function quizPopulate(quizPage) {

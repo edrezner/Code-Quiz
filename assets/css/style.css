@@ -2,14 +2,14 @@ button {
     display: block;
 }
 
-body {
-    background-color: #CCB3F2 ;
-}
-
 .hsScreen {
     display: none;
 }
 
 .hsP {
     display: inline-block;
+}
+
+.hsFinal {
+    display: none;
 }
