@@ -4,35 +4,35 @@ var timeRemaining = 75;
 var timerInterval = "";
 var start = document.querySelector(".start");
 var timer = document.querySelector(".timer");
-var newH2 = document.createElement("h2");
+var newH1 = document.createElement("h1");
 var hsInput = document.createElement("input");
 var quizButton = "";
 var quizButton2 = "";
 var quizBody = [
     {
         title: "Commonly used data types DO NOT include:",
-        choices: ["strings", "booleans", "alerts", "numbers",],
-        answer: 'alerts',
+        choices: ["1. strings", "1. booleans", "3. alerts", "4. numbers",],
+        answer: '3. alerts',
     },
     {
-        title: "The condition in an if / else statement is enclosed within ____.",
-        choices: ["quotes", "parentheses", "curly brackets", "square brackets"],
-        answer: "parentheses",
+        title: "The condition in an if / else statement is enclosed within _____.",
+        choices: ["1. quotes", "2.parentheses", "3. curly brackets", "4. square brackets"],
+        answer: "2. parentheses",
     },
     {
-        title: "Arrays in JavaScript can be used to store ____.",
-        choices: ["numbers and strings", "other arrays", "booleans", "all of the above"],
-        answer: "all of the above",
+        title: "Arrays in JavaScript can be used to store _____.",
+        choices: ["1. numbers and strings", "2. other arrays", "3. booleans", "4. all of the above"],
+        answer: "4. all of the above",
     },
     {
-        title: "String values must be enclosed within _____ when being assigned to variables.",
-        choices: ["quotes", "curly brackets", "commas", "parenthesis"],
-        answer: "quotes",
+        title: "String values must be enclosed within ______ when being assigned to variables.",
+        choices: ["1. quotes", "2. curly brackets", "3. commas", "4. parenthesis"],
+        answer: "1. quotes",
     },
     {
         title: "A very useful tool used during development and debugging for printing content to the debugger is",
-        choices: ["JavaScript", "terminal/bash", "for loops", "console.log"],
-        answer: "console.log",
+        choices: ["1. JavaScript", "2. terminal/bash", "3. for loops", "4. console.log"],
+        answer: "4. console.log",
     },
 ];
 var quizPage = 0;
@@ -47,7 +47,7 @@ function highScoreScreen() {
 
     clearInterval(timerInterval);
 
-    hsScreen.style.display = "block";
+    hsScreen.style.display = "flex";
 
     hsP.textContent = "Your final score is " + timeRemaining + ".";
 
@@ -71,8 +71,8 @@ function highScoreScreen() {
         var header = document.querySelector(".header");
         header.style.display = "none";
 
-        hsScreen.appendChild(newH2);
-        newH2.textContent = "High Scores";
+        hsScreen.appendChild(newH1);
+        newH1.textContent = "High Scores";
 
         var hsList = document.createElement("ol");
         hsScreen.appendChild(hsList);
@@ -110,9 +110,9 @@ function highScoreScreen() {
 function quizPopulate(quizPage) {
     content.innerHTML = "";
 
-    content.appendChild(newH2);
+    content.appendChild(newH1);
 
-    newH2.textContent = quizBody[quizPage].title;
+    newH1.textContent = quizBody[quizPage].title;
 
     for (var i = 0; i < 4; i++) {
         quizButton = document.createElement("button");
