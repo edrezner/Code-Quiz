@@ -1,15 +1,36 @@
 body {
-    font-family: "Arial";
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 a {
     text-decoration: none;
+    color:rgb(204, 134, 253);
 }
+
+button {
+    border-radius: 10px;
+    justify-content: flex-start;
+    background-color: indigo;   
+    color: white;
+    margin: 0 auto;
+    padding: 10px; 
+    margin: 10px 0; 
+    width: 30%;
+    text-align: left;
+    font-size: 26px;
+}
+
+button:hover {
+    cursor: pointer;
+    background-color: rgb(243, 76, 207);
+}
+
 
 .header {
     display: flex;
     justify-content: space-between;
     height: 200px;
+    font-size: 22px;
 }
 
 .timer {
@@ -21,18 +42,23 @@ a {
     width: 50%;
     flex-direction: column;
     justify-content: flex-start; 
-    align-items: flex-start
+    align-items: flex-start;
+}
+
+.content h1, .hsScreen h1 {
+    font-size: 52px;
 }
 
 .content, .hsScreen {
     display: flex;
+    flex-wrap: wrap;
 }
 
 .coding, .description, .start {
     margin: 0 auto;
     padding: 10px;
     text-align: center;
-    font-size: 20px;  
+    font-size: 36px;  
 }
 
 .mark {
@@ -43,23 +69,34 @@ a {
     display: none;
 }
 
-button {
-    border-radius: 10px;
-    justify-content: flex-start;
-    background-color: indigo;   
-    color: white;
-    font-size: 20px;
-}
-
-button:hover {
-    cursor: pointer;
-    background-color: rgb(250, 230, 250);
+.entinit {
+    display: flex;
+    flex-wrap: wrap;
 }
 
 .entinit {
-    display: inline-flex;
+    font-size: 26px;
 }
 
+.initBox {
+    height: 25px;
+}
 ol {
     background-color: rgb(202, 160, 233);
 }
+
+li {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    padding-right: 20px;
+    width: 300px;
+    text-align: left;
+    padding: 10px 0;
+    border-bottom: 10px solid white;
+}
+
+
+ .goBack, .clearHs {
+    flex-wrap: wrap;
+    width: fit-content;
+    padding: 10px 20px;
+ }

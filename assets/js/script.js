@@ -11,12 +11,12 @@ var quizButton2 = "";
 var quizBody = [
     {
         title: "Commonly used data types DO NOT include:",
-        choices: ["1. strings", "1. booleans", "3. alerts", "4. numbers",],
+        choices: ["1. strings", "2. booleans", "3. alerts", "4. numbers",],
         answer: '3. alerts',
     },
     {
         title: "The condition in an if / else statement is enclosed within _____.",
-        choices: ["1. quotes", "2.parentheses", "3. curly brackets", "4. square brackets"],
+        choices: ["1. quotes", "2. parentheses", "3. curly brackets", "4. square brackets"],
         answer: "2. parentheses",
     },
     {
@@ -40,14 +40,81 @@ var hsP = document.querySelector(".hsP");
 var hsScreen = document.querySelector(".hsScreen");
 var hsSubmit = document.querySelector(".hsSubmit");
 var initInput = document.querySelector(".initBox");
+var hsLink = document.querySelector("a");
 
+hsLink.addEventListener ("click", highScoreScreen);
 
 function highScoreScreen() {
+    content.innerHTML = "";
+
+    mark.innerHTML - "";
+
+    clearInterval(timerInterval);
+
+    hsScreen.style.display = "flex";
+
+    var initScore = initInput.textContent.trim() + " - " + timeRemaining;
+    var initScores = localStorage.getItem("highScores") || [];
+    if (initScores.length > 0) {
+        initScores = JSON.parse(initScores);
+    }
+    
+    if (initInput.length > 0) {
+        initScores.push(initScore);
+    }
+    
+    localStorage.setItem("highScores", JSON.stringify(initScores));
+
+    hsScreen.innerHTML = "";
+
+    var header = document.querySelector(".header");
+    header.style.visibility = "hidden";
+
+    hsScreen.appendChild(newH1);
+    newH1.textContent = "High Scores";
+
+    var hsList = document.createElement("ol");
+    hsScreen.appendChild(hsList);
+
+    var scoreListItem = JSON.parse(localStorage.getItem("highScores"));
+
+    for (var i = 0; i < initScores.length; i++) {
+        var hsItem = document.createElement("li");
+        hsItem.textContent = scoreListItem[i];
+        hsList.appendChild(hsItem);
+    };
+
+
+    quizButton = document.createElement("button");
+    hsScreen.appendChild(quizButton);
+    quizButton.classList.add("goBack");
+    quizButton.textContent = "Go Back";
+
+    quizButton2 = document.createElement("button");
+    hsScreen.appendChild(quizButton2);
+    quizButton2.classList.add("clearHs");
+    quizButton2.textContent = "Clear High Scores";
+
+    quizButton.addEventListener("click", function () {
+        location.reload();
+    });
+
+    quizButton2.addEventListener("click", function () {
+        localStorage.clear();
+        hsList.innerHTML = "";
+    })
+};
+
+function quizEnd() {
     content.innerHTML = "";
 
     clearInterval(timerInterval);
 
     hsScreen.style.display = "flex";
+
+    if (timeRemaining < 0) {
+        timeRemaining = 0;
+    }
 
     hsP.textContent = "Your final score is " + timeRemaining + ".";
 
@@ -55,56 +122,7 @@ function highScoreScreen() {
         mark.innerHTML = "";
     });
 
-    hsSubmit.addEventListener("click", function (event) {
-        event.preventDefault();
-
-        var initScore = initInput.value.trim() + " - " + timeRemaining;
-        var initScores = localStorage.getItem("highScores") || [];
-        if (initScores.length > 0) {
-            initScores = JSON.parse(initScores);
-        }
-        initScores.push(initScore);
-        localStorage.setItem("highScores", JSON.stringify(initScores));
-
-        hsScreen.innerHTML = "";
-
-        var header = document.querySelector(".header");
-        header.style.display = "none";
-
-        hsScreen.appendChild(newH1);
-        newH1.textContent = "High Scores";
-
-        var hsList = document.createElement("ol");
-        hsScreen.appendChild(hsList);
-
-        var scoreListItem = JSON.parse(localStorage.getItem("highScores"));
-
-        for (var i = 0; i < initScores.length; i++) {
-            var hsItem = document.createElement("li");
-            hsItem.textContent = scoreListItem[i];
-            hsList.appendChild(hsItem);
-        };
-
-
-        quizButton = document.createElement("button");
-        hsScreen.appendChild(quizButton);
-        quizButton.classList.add("goBack");
-        quizButton.textContent = "Go Back";
-
-        quizButton2 = document.createElement("button");
-        hsScreen.appendChild(quizButton2);
-        quizButton2.classList.add("clearHs");
-        quizButton2.textContent = "Clear High Scores";
-
-        quizButton.addEventListener("click", function () {
-            location.reload();
-        });
-
-        quizButton2.addEventListener("click", function () {
-            localStorage.clear();
-            hsList.innerHTML = "";
-        })
-    });
+    hsSubmit.addEventListener("click", highScoreScreen)
 }
 
 function quizPopulate(quizPage) {
@@ -142,7 +160,7 @@ function quizPopulate(quizPage) {
             if (quizPage < quizBody.length) {
                 quizPopulate(quizPage);
             } else {
-                highScoreScreen();
+                quizEnd();
             }
         });
 
@@ -158,13 +176,20 @@ start.addEventListener("click", function (event) {
     event.preventDefault();
     timerInterval = setInterval(function () {
         timeRemaining--;
-        timer.textContent = "Time Remaining: " + timeRemaining;
+        timer.textContent = "Time: " + timeRemaining;
 
-        if (timeRemaining === 0) {
+        if (timeRemaining <= 0) {
             clearInterval(timerInterval);
             alert("Time is up!");
+            quizEnd();
         }
     }, 1000);
     quizPopulate(0);
+});
+
+var hsLink = document.querySelector("a");
+
+hsLink.addEventListener("click", function () {
+    hsSubmit.click();
 });
 
