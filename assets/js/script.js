@@ -39,7 +39,7 @@ var quizPage = 0;
 var hsP = document.querySelector(".hsP");
 var hsScreen = document.querySelector(".hsScreen");
 var hsSubmit = document.querySelector(".hsSubmit");
-var initInput = document.querySelector(".initBox");
+var initBox = document.querySelector(".initBox");
 var hsLink = document.querySelector("a");
 
 hsLink.addEventListener ("click", highScoreScreen);
@@ -53,16 +53,16 @@ function highScoreScreen() {
 
     hsScreen.style.display = "flex";
 
-    var initScore = initInput.textContent.trim() + " - " + timeRemaining;
+    var initScore = initBox.value.trim() + " - " + timeRemaining;
     var initScores = localStorage.getItem("highScores") || [];
+    
     if (initScores.length > 0) {
         initScores = JSON.parse(initScores);
     }
     
-    if (initInput.length > 0) {
-        initScores.push(initScore);
-    }
+    initScores.push(initScore);
     
+
     localStorage.setItem("highScores", JSON.stringify(initScores));
 
     hsScreen.innerHTML = "";
