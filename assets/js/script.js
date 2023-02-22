@@ -41,13 +41,14 @@ var hsScreen = document.querySelector(".hsScreen");
 var hsSubmit = document.querySelector(".hsSubmit");
 var initBox = document.querySelector(".initBox");
 var hsLink = document.querySelector("a");
+var init = document.querySelector(".init");
 
 hsLink.addEventListener ("click", highScoreScreen);
 
 function highScoreScreen() {
     content.innerHTML = "";
 
-    mark.innerHTML - "";
+    mark.innerHTML = "";
 
     clearInterval(timerInterval);
 
@@ -59,9 +60,9 @@ function highScoreScreen() {
     if (initScores.length > 0) {
         initScores = JSON.parse(initScores);
     }
-    
-    initScores.push(initScore);
-    
+    if (initBox.value != "") {
+        initScores.push(initScore);
+    }
 
     localStorage.setItem("highScores", JSON.stringify(initScores));
 
@@ -84,7 +85,7 @@ function highScoreScreen() {
         hsList.appendChild(hsItem);
     };
 
-
+    
     quizButton = document.createElement("button");
     hsScreen.appendChild(quizButton);
     quizButton.classList.add("goBack");

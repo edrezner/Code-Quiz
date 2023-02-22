@@ -115,3 +115,8 @@ li {
     width: fit-content;
     padding: 10px 20px;
  }
+
+ .mark {
+    color: gray;
+    font-style: italic;
+ }
