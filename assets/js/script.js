@@ -5,9 +5,7 @@ var timerInterval = "";
 var start = document.querySelector(".start");
 var timer = document.querySelector(".timer");
 var newH1 = document.createElement("h1");
-var hsInput = document.createElement("input");
 var quizButton = "";
-var quizButton2 = "";
 var quizBody = [
     {
         title: "Commonly used data types DO NOT include:",
@@ -26,7 +24,7 @@ var quizBody = [
     },
     {
         title: "String values must be enclosed within ______ when being assigned to variables.",
-        choices: ["1. quotes", "2. curly brackets", "3. commas", "4. parenthesis"],
+        choices: ["1. quotes", "2. curly brackets", "3. commas", "4. parentheses"],
         answer: "1. quotes",
     },
     {
@@ -36,12 +34,10 @@ var quizBody = [
     },
 ];
 var quizPage = 0;
-var hsP = document.querySelector(".hsP");
 var hsScreen = document.querySelector(".hsScreen");
 var hsSubmit = document.querySelector(".hsSubmit");
 var initBox = document.querySelector(".initBox");
 var hsLink = document.querySelector("a");
-var init = document.querySelector(".init");
 
 hsLink.addEventListener ("click", highScoreScreen);
 
@@ -85,14 +81,19 @@ function highScoreScreen() {
         hsList.appendChild(hsItem);
     };
 
-    
+    var hsScreenTwo = document.createElement("article");
+    hsScreen.appendChild(hsScreenTwo);
+    hsScreenTwo.classList.add("hsScreenTwo");
+    hsScreenTwo.style.display = "flex";
+
     quizButton = document.createElement("button");
-    hsScreen.appendChild(quizButton);
+    hsScreenTwo.appendChild(quizButton);
     quizButton.classList.add("goBack");
     quizButton.textContent = "Go Back";
 
+    var quizButton2 = "";
     quizButton2 = document.createElement("button");
-    hsScreen.appendChild(quizButton2);
+    hsScreenTwo.appendChild(quizButton2);
     quizButton2.classList.add("clearHs");
     quizButton2.textContent = "Clear High Scores";
 
@@ -115,18 +116,26 @@ function quizEnd() {
 
     if (timeRemaining < 0) {
         timeRemaining = 0;
+        timer.textContent = "Time: " + timeRemaining;
     }
 
+    var hsP = document.querySelector(".hsP");
     hsP.textContent = "Your final score is " + timeRemaining + ".";
 
     hsSubmit.addEventListener("mousedown", function () {
         mark.innerHTML = "";
     });
 
-    hsSubmit.addEventListener("click", highScoreScreen)
+    hsSubmit.addEventListener("click", function(){
+        if (initBox.value.length == 0) {
+            alert("You must enter your initials to register a score!")
+        } else {
+            highScoreScreen()
+        }
+    });
 }
 
-function quizPopulate(quizPage) {
+function renderQuiz(quizPage) {
     content.innerHTML = "";
 
     content.appendChild(newH1);
@@ -149,7 +158,7 @@ function quizPopulate(quizPage) {
             mark.appendChild(newP);
             if (selectedAnswer !== quizBody[quizPage].answer) {
                 timeRemaining = timeRemaining - 10;
-
+                timer.textContent = "Time: " + timeRemaining;
                 newP.textContent = "Wrong!";
             } else {
 
@@ -159,7 +168,7 @@ function quizPopulate(quizPage) {
             quizPage++;
 
             if (quizPage < quizBody.length) {
-                quizPopulate(quizPage);
+                renderQuiz(quizPage);
             } else {
                 quizEnd();
             }
@@ -185,12 +194,6 @@ start.addEventListener("click", function (event) {
             quizEnd();
         }
     }, 1000);
-    quizPopulate(0);
-});
-
-var hsLink = document.querySelector("a");
-
-hsLink.addEventListener("click", function () {
-    hsSubmit.click();
+    renderQuiz(0);
 });
 

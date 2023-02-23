@@ -11,14 +11,18 @@ a {
     color:rgb(204, 134, 253);
 }
 
+h1 {
+    font-size: 52px;
+}
+
 button {
     border-radius: 10px;
     justify-content: flex-start;
-    background-color: indigo;   
+    background-color: indigo;
+    width: 30%;
     color: white;
     padding: 10px; 
     margin: 10px 0; 
-    width: 30%;
     text-align: left;
     font-size: 26px;
 }
@@ -48,31 +52,30 @@ button:hover {
     align-items: flex-start;
 }
 
-.content h1, .hsScreen h1 {
-    font-size: 52px;
-}
-
 .content, .hsScreen {
     display: flex;
-    flex-wrap: wrap;
 }
 
 .coding, .description, .start {
     margin: 0 auto;
     padding: 10px;
-    text-align: center;
-    font-size: 36px;  
+    text-align: center; 
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: fit-content;
 }
 
-.mark {
-    display: flexbox;
+.start {
+    padding: 10px 30px;
+    margin-top: 10px;
 }
 
 .hsScreen {
     display: none;
 }
 
-.init {
+.hsScreenTwo {
     display: inline-flex;
     flex-wrap: wrap;
     width: 100%;
@@ -98,6 +101,7 @@ button:hover {
 
 ol {
     background-color: rgb(202, 160, 233);
+    border-radius: 10px;
 }
 
 li {
@@ -106,6 +110,10 @@ li {
     width: 300px;
     text-align: left;
     padding: 10px 0;
+    font-size: 26px;
+}
+
+li::before {
     border-bottom: 10px solid white;
 }
 
@@ -114,9 +122,26 @@ li {
     flex-wrap: wrap;
     width: fit-content;
     padding: 10px 20px;
+    margin-right: 10px;
  }
 
  .mark {
     color: gray;
     font-style: italic;
+ }
+
+ @media screen and (max-width: 1136px) {
+    p, li {
+        font-size: 22px !important;
+    }
+
+    h1 {
+        font-size: 40px !important;
+    }
+
+    button {
+        display: flex;
+        flex-direction: column;
+        width: fit-content;
+    }
  }
