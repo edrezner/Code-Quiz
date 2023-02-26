@@ -37,6 +37,6 @@ One known issue; I was unable to sort the scores from highest to lowest at this 
 
 7. https://stackoverflow.com/questions/47964424/how-to-add-multiple-buttons-with-a-for-loop-click-event-in-javascript
 
-https://stackoverflow.com/questions/44789080/adding-content-to-multiple-classes-with-loops-but-only-1-element-from-each-clas
+    https://stackoverflow.com/questions/44789080/adding-content-to-multiple-classes-with-loops-but-only-1-element-from-each-clas
 
-The above helped to piece together how to create buttons in a for loop as well as add text content to them.
+    The above helped to piece together how to create buttons in a for loop as well as add text content to them.
