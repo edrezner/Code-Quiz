@@ -34,3 +34,9 @@ One known issue; I was unable to sort the scores from highest to lowest at this 
 5. https://www.digitalocean.com/community/tutorials/js-json-parse-stringify - general info on how to use parse() and stringify().
 
 6. https://developer.mozilla.org/en-US/docs/Web/API/Element/mousedown_event - mousedown events had not been known to me prior; read up on this to implement that functionality for clearing the hr element and correct/wrong text.
+
+7. https://stackoverflow.com/questions/47964424/how-to-add-multiple-buttons-with-a-for-loop-click-event-in-javascript
+
+https://stackoverflow.com/questions/44789080/adding-content-to-multiple-classes-with-loops-but-only-1-element-from-each-clas
+
+The above helped to piece together how to create buttons in a for loop as well as add text content to them.

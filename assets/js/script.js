@@ -206,10 +206,9 @@ function renderQuiz(quizPage) {
         quizButton.addEventListener("mousedown", function () {
             mark.innerHTML = "";
         });
-
-
     };
 }
+
 // Sets the functionality of the 'Start Quiz' button. Starts the quiz, timer and sets condition if time runs out.
 start.addEventListener("click", function (event) {
     event.preventDefault();
