@@ -1,3 +1,4 @@
+/* The following element selectors style the base appearance of the quiz */
 body {
     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
@@ -27,11 +28,25 @@ button {
     font-size: 26px;
 }
 
+/* Changes the button and mouse cursor appearance when a button is moused over */
 button:hover {
     cursor: pointer;
     background-color: rgb(243, 76, 207);
 }
 
+ol {
+    background-color: rgb(202, 160, 233);
+    border-radius: 10px;
+}
+
+li {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    padding-right: 20px;
+    width: 300px;
+    text-align: left;
+    padding: 10px 0;
+    font-size: 26px;
+}
 
 .header {
     display: flex;
@@ -44,6 +59,7 @@ button:hover {
     margin: 0;
 }
 
+/* The following class selectors alter the positioning of most of the actual quiz content and high score screen */
 .content, .hsScreen, .mark {
     margin: 0 auto;
     width: 50%;
@@ -71,12 +87,13 @@ button:hover {
     margin-top: 10px;
 }
 
+/* This ensures the starting hsScreen HTML is not displayed on page load until adjusted by the JavaScript functions */
 .hsScreen {
     display: none;
 }
 
 .hsScreenTwo {
-    display: inline-flex;
+    display: flex;
     flex-wrap: wrap;
     width: 100%;
 }
@@ -99,25 +116,6 @@ button:hover {
     text-align: center;
 }
 
-ol {
-    background-color: rgb(202, 160, 233);
-    border-radius: 10px;
-}
-
-li {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    padding-right: 20px;
-    width: 300px;
-    text-align: left;
-    padding: 10px 0;
-    font-size: 26px;
-}
-
-li::before {
-    border-bottom: 10px solid white;
-}
-
-
  .goBack, .clearHs {
     flex-wrap: wrap;
     width: fit-content;
@@ -130,6 +128,8 @@ li::before {
     font-style: italic;
  }
 
+
+ /* Adjusts the elements sizing on smaller screens so everything fits neatly and no button text is squished or cut off */
  @media screen and (max-width: 1136px) {
     p, li {
         font-size: 22px !important;

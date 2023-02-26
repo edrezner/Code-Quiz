@@ -1,3 +1,5 @@
+// All variables used globally or used in more than one function are listed at the top.
+// quizBody object is listed here to keep the content of the function it's used in less voluminous.
 var content = document.querySelector(".content")
 var mark = document.querySelector(".mark")
 var timeRemaining = 75;
@@ -39,11 +41,14 @@ var hsSubmit = document.querySelector(".hsSubmit");
 var initBox = document.querySelector(".initBox");
 var hsLink = document.querySelector("a");
 
+// Displays the high score list when the 'View High Scores' link is clicked.
 hsLink.addEventListener ("click", highScoreScreen);
 
+// Displays the high score list.
 function highScoreScreen() {
     content.innerHTML = "";
 
+    // The next two lines are here in case if the 'View High Score' link is clicked in the middle of the quiz.
     mark.innerHTML = "";
 
     clearInterval(timerInterval);
@@ -53,34 +58,44 @@ function highScoreScreen() {
     var initScore = initBox.value.trim() + " - " + timeRemaining;
     var initScores = localStorage.getItem("highScores") || [];
     
+    // If there is a list of high scores, they are turned into a JavaScript object.
     if (initScores.length > 0) {
         initScores = JSON.parse(initScores);
     }
+
+    // If the initials input text box is not empty, it is added to the end of the High Score list.
     if (initBox.value != "") {
         initScores.push(initScore);
     }
 
+    // Sets the local storage with a JSON string of the high score list.
     localStorage.setItem("highScores", JSON.stringify(initScores));
 
+    // Clears the hsScreen content so that new elements displaying the high score list and two new buttons can be appended.
     hsScreen.innerHTML = "";
 
+    // Header is hidden on this page.
     var header = document.querySelector(".header");
     header.style.visibility = "hidden";
 
     hsScreen.appendChild(newH1);
     newH1.textContent = "High Scores";
 
+    // Creates an ordered list for the high scores to eventually be displayed.
     var hsList = document.createElement("ol");
     hsScreen.appendChild(hsList);
 
+    // Turns the JSON string in local storage into a JavaScript object.
     var scoreListItem = JSON.parse(localStorage.getItem("highScores"));
 
+    // Creates the list items from the high score list.
     for (var i = 0; i < initScores.length; i++) {
         var hsItem = document.createElement("li");
         hsItem.textContent = scoreListItem[i];
         hsList.appendChild(hsItem);
     };
 
+    // Button elements are created and the display style needs to be reset since the original HTML was cleared earlier.
     var hsScreenTwo = document.createElement("article");
     hsScreen.appendChild(hsScreenTwo);
     hsScreenTwo.classList.add("hsScreenTwo");
@@ -97,16 +112,19 @@ function highScoreScreen() {
     quizButton2.classList.add("clearHs");
     quizButton2.textContent = "Clear High Scores";
 
+    // Refreshes the page when the 'Go Back' button is clicked.
     quizButton.addEventListener("click", function () {
         location.reload();
     });
 
+    // Clears local storage and high score list.
     quizButton2.addEventListener("click", function () {
         localStorage.clear();
         hsList.innerHTML = "";
     })
 };
 
+// This function is called when the user answers the final question; hiding the quiz content and displaying the HTML within the hsScreen section.
 function quizEnd() {
     content.innerHTML = "";
 
@@ -114,6 +132,7 @@ function quizEnd() {
 
     hsScreen.style.display = "flex";
 
+    // This conditional statement preevents a negative score in case the user answered wrong on the final question with less than 10 seconds remaining.
     if (timeRemaining < 0) {
         timeRemaining = 0;
         timer.textContent = "Time: " + timeRemaining;
@@ -126,6 +145,7 @@ function quizEnd() {
         mark.innerHTML = "";
     });
 
+    // Makes sure the text box for user initials cannot be empty.
     hsSubmit.addEventListener("click", function(){
         if (initBox.value.length == 0) {
             alert("You must enter your initials to register a score!")
@@ -135,13 +155,22 @@ function quizEnd() {
     });
 }
 
+// This function populates all the quiz content (questions and answer buttons).
 function renderQuiz(quizPage) {
+   
+    // Clears the current HTML within the .content section and appends new elements that make up the quiz.
     content.innerHTML = "";
 
     content.appendChild(newH1);
 
     newH1.textContent = quizBody[quizPage].title;
 
+    /* This loop creates all the buttons containing the quiz answers selecting the correct set of questions
+    pased on the index from the quizPage variable. Every button click advances the quizPage variable by one.
+    The correct answer button adds an hr element and 'correct' text underneath the quiz. The wrong 
+    answer button subtracts 10 seconds from the time remaining and adds an hr element and 'wrong' 
+    text under the quiz. A mousedown on any button clears the hr element and any correct/wrong text.
+    Once the quizPage variable is no longer less than the quizBody length the quizEnd function is ran. */
     for (var i = 0; i < 4; i++) {
         quizButton = document.createElement("button");
 
@@ -181,7 +210,7 @@ function renderQuiz(quizPage) {
 
     };
 }
-
+// Sets the functionality of the 'Start Quiz' button. Starts the quiz, timer and sets condition if time runs out.
 start.addEventListener("click", function (event) {
     event.preventDefault();
     timerInterval = setInterval(function () {

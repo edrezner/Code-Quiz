@@ -8,11 +8,15 @@
     <title>Code Quiz</title>
 </head>
 
+<!--All the HTML for the quiz will take place in two sections. A header and a separate section letting the user know if they got a question right/wrong are the only two other sections.-->
 <body>
+    <!-- High Score link and timer placed in the header; will only be hidden at high score list screen -->
     <section class="header">
         <a href="#">View high scores</a>
         <p class="timer">Time: 0</p>
     </section>
+
+    <!--This section contains the start screen and the quiz questions/button answers-->
     <section class="content">
         <h1 class="coding">Coding Quiz Challenge</h1>
         <p class="description">Try to answer the following code-related questions within the time limit.
@@ -22,6 +26,7 @@
         <button class="start">Start Quiz</button>
     </section>
 
+    <!--This section contains the initials input and high score list-->
     <section class="hsScreen">
         <h1>All Done!</h1>
         <p class="hsP"></p>
@@ -32,6 +37,7 @@
         </article>
     </section>
 
+    <!--This section will contain the correct/wrong text after an answer in the quiz is selected.-->
     <section class="mark"></section>
 
     <script src="./assets/js/script.js"></script>
